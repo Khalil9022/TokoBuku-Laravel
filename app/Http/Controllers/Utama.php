@@ -40,4 +40,16 @@ class Utama extends Controller
             return response($res);
         }
     }
+
+    public function getData()
+    {
+        $barang = DB::table('tbl_barang')->get();
+        $res = array(
+            'message' => 1,
+            'data' => $barang
+        );
+
+        header('Content-Type:application/json');
+        return response($res);
+    }
 }
