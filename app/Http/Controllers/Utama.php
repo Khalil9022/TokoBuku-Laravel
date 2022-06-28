@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\M_Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class Utama extends Controller
 {
     public function index()
     {
         $barang = DB::table('tbl_barang')->get();
-        return view('Utama', ['barang' => $barang]);
+        return view('/Utama', ['barang' => $barang]);
     }
 
     // MENGGUNAKAN API untuk memasukkan barang

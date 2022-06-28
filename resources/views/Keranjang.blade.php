@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Login | E-Shopper</title>
+    <title>Cart | E-Shopper</title>
     <link href="/BahanStudy/css/bootstrap.min.css" rel="stylesheet">
     <link href="/BahanStudy/css/font-awesome.min.css" rel="stylesheet">
     <link href="/BahanStudy/css/prettyPhoto.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="/Login"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
                                 <li><a href="/" class="active">Home</a></li>
-                                <li><a href="/">Contact</a></li>
-                                <li><a href="/">Confirm</a></li>
+                                <li><a href="contact-us.html">Contact</a></li>
+                                <li><a href="konfirmasi.html">Confirm</a></li>
                             </ul>
                         </div>
                     </div>
@@ -81,55 +81,77 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    @if(session('alert'))
-                    <div class="alert alert-success"> {{ session('alert') }}</div>
-                    @elseif(session('warning'))
-                    <div class="alert alert-danger">{{ session('warning') }}</div>
-                    @endif
-                </div>
             </div>
         </div>
         <!--/header-bottom-->
     </header>
     <!--/header-->
-    <section id="form">
-        <!--form-->
+
+    <section id="cart_items">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-1">
-                    <div class="login-form">
-                        <!--login form-->
-                        <h2>Login to your account</h2>
-                        <form action="/Masuk" method="post">
-                            <input type="email" placeholder="Email Address" name="email" />
-                            <input type="password" placeholder="Password" name="password" />
-                            <button type="submit" class="btn btn-default">Login</button>
-                        </form>
-                    </div>
-                    <!--/login form-->
-                </div>
-                <div class="col-sm-1">
-                    <h2 class="or">OR</h2>
-                </div>
-                <div class="col-sm-4">
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>New User Signup!</h2>
-                        <form action="/Daftar" method="post">
-                            <input type="text" placeholder="Name" name="nama" />
-                            <input type="email" placeholder="Email Address" name="email" />
-                            <input type="password" placeholder="Password" name="password" />
-                            <button type="submit" class="btn btn-default">Signup</button>
-                        </form>
-                    </div>
-                    <!--/sign up form-->
-                </div>
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $total = 0; ?>
+                        @foreach($keranjang as $keranjang)
+                        <tr>
+                            <td class="cart_product" style="padding-left: 10px;">
+                                <a href=""><img src="/data_file/{{ $keranjang->gambar }}" width="90px" height="120px" alt="Gambar"></a>
+                            </td>
+                            <td class="cart_description">
+                                <p style=""><a href="">{{ $keranjang->nama_produk }}</a></p>
+                            </td>
+                            <td class="cart_price">
+                                <p>Rp.{{ $keranjang->harga }}</p>
+                            </td>
+                            <td class="cart_quantity">
+                                {{ $keranjang->jumlah }}
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">Rp.{{ $keranjang->harga * $keranjang->jumlah }}</p>
+                            </td>
+                        </tr>
+                        <?php $total += ($keranjang->jumlah * $keranjang->harga);  ?>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
-    <!--/form-->
+    <!--/#cart_items-->
 
+    <section id="do_action">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div class="total_area">
+                        <ul>
+                            <li>Total <span>Rp.{{ $total }}</span></li>
+                        </ul>
+                        <a class="btn btn-default check_out" style="margin-left:40px" href="">Check Out</a>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+    </section>
+    <!--/#do_action-->
 
     <footer id="footer">
         <!--Footer-->
@@ -147,10 +169,10 @@
     <!--/Footer-->
 
 
+
     <script src="/BahanStudy/js/jquery.js"></script>
-    <script src="/BahanStudy/js/price-range.js"></script>
-    <script src="/BahanStudy/js/jquery.scrollUp.min.js"></script>
     <script src="/BahanStudy/js/bootstrap.min.js"></script>
+    <script src="/BahanStudy/js/jquery.scrollUp.min.js"></script>
     <script src="/BahanStudy/js/jquery.prettyPhoto.js"></script>
     <script src="/BahanStudy/js/main.js"></script>
 </body>

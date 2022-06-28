@@ -21,3 +21,4 @@ Route::post('/Masuk', 'Login@masuk');
 Route::get('/Logout', 'Login@logout');
 
 Route::post('/AddCart', 'Order@order');
+Route::get('/Keranjang', 'Order@keranjang');

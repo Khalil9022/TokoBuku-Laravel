@@ -17,4 +17,10 @@ class Order extends Controller
         ]);
         return redirect('/')->with('alert', 'Berhasil Ditambahkan!');
     }
+
+    public function keranjang()
+    {
+        $keranjang = DB::table('keranjang')->get();
+        return view('/Keranjang', ['keranjang' => $keranjang]);
+    }
 }
