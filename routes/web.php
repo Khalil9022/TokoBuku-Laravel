@@ -14,6 +14,10 @@
 Route::get('/', 'Utama@index');
 Route::post('/pushData', 'Utama@store');
 Route::get('/getData', 'Utama@getData');
+
 Route::get('/Login', 'Login@index');
 Route::post('/Daftar', 'Login@register');
 Route::post('/Masuk', 'Login@masuk');
+Route::get('/Logout', 'Login@logout');
+
+Route::post('/AddCart', 'Order@order');

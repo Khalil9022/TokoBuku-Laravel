@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Login extends Controller
 {
@@ -30,12 +31,22 @@ class Login extends Controller
             return redirect('/Login')->with('warning', 'Email Salah!');
         }
         if ($user->password == $request->password) {
-            $request->session()->put('id', $user->id);
+            //code dibawah sessionnya hanya bisa digunakan jika menggunakan metode Post saja! 
+            //$request->session()->put('id', $user->id);
+
+            Session::put('id_user', $user->id);
+
             //echo 'Data disimpan dengan session ID = ' . $request->session()->get('id');
             return redirect('/');
         } else {
             //echo "Anda gagal Login!";
             return redirect('/Login')->with('warning', 'Gagal Login!');
         }
+    }
+
+    public function logout()
+    {
+        Session::forget('id_user');
+        return redirect('/Login')->with('alert', 'Logout Berhasil!');
     }
 }
