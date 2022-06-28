@@ -114,7 +114,7 @@
                                 <a href=""><img src="/data_file/{{ $keranjang->gambar }}" width="90px" height="120px" alt="Gambar"></a>
                             </td>
                             <td class="cart_description">
-                                <p style=""><a href="">{{ $keranjang->nama_produk }}</a></p>
+                                <p><a href="">{{ $keranjang->nama_produk }}</a></p>
                             </td>
                             <td class="cart_price">
                                 <p>Rp.{{ $keranjang->harga }}</p>
