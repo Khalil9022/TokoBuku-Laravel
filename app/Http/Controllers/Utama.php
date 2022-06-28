@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\M_Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class Utama extends Controller
 {
