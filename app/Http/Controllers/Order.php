@@ -60,4 +60,24 @@ class Order extends Controller
     {
         return view('/Confirm');
     }
+
+    public function confirm_simpan(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|max:2048' //maximal hanya 2MB 
+        ]);
+
+        $file = $request->file('file'); // menyimpan alamat file kedalam $file
+        $nama_file = time() . "_" . $file->getClientOriginalName(); //mengambil nama asli dari $file, dan time() digunakan agar nama file terlihat unique
+
+        $tujuan_upload = 'data_file';
+        if ($file->move($tujuan_upload, $nama_file)) {
+            DB::table('tbl_konfirmasi')->insert([
+                'id_user' => Session::get('id_user'),
+                'id_checkout' => $request->id_token,
+                'bukti' => $nama_file
+            ]);
+            return redirect('/Confirm');
+        }
+    }
 }

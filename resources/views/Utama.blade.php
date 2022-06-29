@@ -6,6 +6,7 @@ $id = session('id_user');
 @if(session('alert'))
 <div class="alert alert-success">{{ session('alert') }}</div>
 @endif
+
 </header>
 <!--/header-->
 
