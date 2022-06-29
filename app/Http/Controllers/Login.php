@@ -35,6 +35,7 @@ class Login extends Controller
             //$request->session()->put('id', $user->id);
 
             Session::put('id_user', $user->id);
+            Session::put('nama_user', $user->nama_user);
 
             //echo 'Data disimpan dengan session ID = ' . $request->session()->get('id');
             return redirect('/');
@@ -47,6 +48,7 @@ class Login extends Controller
     public function logout()
     {
         Session::forget('id_user');
+        Session::forget('nama_user');
         return redirect('/Login')->with('alert', 'Logout Berhasil!');
     }
 }

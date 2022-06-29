@@ -20,7 +20,44 @@ class Order extends Controller
 
     public function keranjang()
     {
-        $keranjang = DB::table('keranjang')->get();
+        $keranjang = DB::table('keranjang')->where('nama_user', Session::get('nama_user'))->get();
         return view('/Keranjang', ['keranjang' => $keranjang]);
+    }
+
+    public function checkout()
+    {
+        $id_checkout = rand();
+        $total = 0;
+        $data = DB::table('tbl_keranjang')->where('id_user', Session::get('id_user'))->get();
+        foreach ($data as $krj) {
+            $barang = DB::table('tbl_barang')->where('id', $krj->id_barang)->get();
+            foreach ($barang as $brg) {
+                $total += ($krj->jumlah * $brg->harga);
+                DB::table('detail_checkout')->insert([
+                    'id_checkout' => $id_checkout,
+                    'id_barang' => $krj->id_barang,
+                    'jumlah' => $krj->jumlah
+                ]);
+            }
+        }
+        DB::table('tbl_checkout')->insert([
+            'id_checkout' => $id_checkout,
+            'id_user' => Session::get('id_user'),
+            'total' => $total
+        ]);
+        return redirect('/Checkout_list');
+    }
+
+    public function checkout_list()
+    {
+        $checkout = DB::table('checkout')->where('id_user', Session::get('id_user'))->get();
+        //DB::table('tbl_checkout')->delete();
+        //DB::table('detail_checkout')->delete();
+        return view('/Checkout', ['checkout' => $checkout]);
+    }
+
+    public function confirm()
+    {
+        return view('/Confirm');
     }
 }

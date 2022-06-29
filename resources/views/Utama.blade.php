@@ -159,7 +159,7 @@ $id = session('id_user');
                     <h4>Masukan Jumlah : </h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" id="id_barang" name="id_barang" value="{{ $brg->id }}">
+                    <input type="hidden" id="id_barang" class="id_barang" name="id_barang" value="{{ $brg->id }}">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Jumlah Beli</label>
                         <input type="text" class="form-control" id="jumlah" name="jumlah" placeholder="Jumlah Beli">
@@ -182,10 +182,10 @@ $id = session('id_user');
 <script src="/BahanStudy/js/jquery.prettyPhoto.js"></script>
 <script src="/BahanStudy/js/main.js"></script>
 
-<!-- java script untuk POP UP modal (Add to cart) -->
+<!-- java script untuk POP UP modal (Add to cart) untuk Mengambil nilai Id barangnya -->
 <script type="text/javascript">
     $(".jumlah").click(function() {
-        $(".id_barang").val($(this).attr('data-id'))
+        $(".id_barang").val($(this).attr('data-id'));
     });
 </script>
 </body>

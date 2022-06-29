@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Cart | E-Shopper</title>
+    <title>Login | E-Shopper</title>
     <link href="/BahanStudy/css/bootstrap.min.css" rel="stylesheet">
     <link href="/BahanStudy/css/font-awesome.min.css" rel="stylesheet">
     <link href="/BahanStudy/css/prettyPhoto.css" rel="stylesheet">
@@ -15,10 +15,10 @@
     <link href="/BahanStudy/css/main.css" rel="stylesheet">
     <link href="/BahanStudy/css/responsive.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="/BahanStudy/images/ico/favicon.ico">
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/BahanStudy/images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/BahanStudy/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/BahanStudy/images/ico/apple-touch-icon-72-precomposed.png">
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-4 clearfix">
                         <div class="logo pull-left">
-                            <a href="/"><img src="/BahanStudy/images/home/logo.png" alt="" /></a>
+                            <a href="index.html"><img src="/BahanStudy/images/home/logo.png" alt="" /></a>
                         </div>
 
                     </div>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="/" class="active">Home</a></li>
+                                <li><a href="index.html" class="active">Home</a></li>
                                 <li><a href="contact-us.html">Contact</a></li>
                                 <li><a href="konfirmasi.html">Confirm</a></li>
                             </ul>
@@ -86,72 +86,27 @@
         <!--/header-bottom-->
     </header>
     <!--/header-->
-
-    <section id="cart_items">
-        <div class="container">
-            <div class="breadcrumbs">
-                <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li class="active">Shopping Cart</li>
-                </ol>
-            </div>
-            <div class="table-responsive cart_info">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr class="cart_menu">
-                            <td class="image">Item</td>
-                            <td class="description"></td>
-                            <td class="price">Price</td>
-                            <td class="quantity">Quantity</td>
-                            <td class="total">Total</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $total = 0; ?>
-                        @foreach($keranjang as $keranjang)
-                        <tr>
-                            <td class="cart_product" style="padding-left: 10px;">
-                                <a href=""><img src="/data_file/{{ $keranjang->gambar }}" width="90px" height="120px" alt="Gambar"></a>
-                            </td>
-                            <td class="cart_description">
-                                <p><a href="">{{ $keranjang->nama_produk }}</a></p>
-                            </td>
-                            <td class="cart_price">
-                                <p>Rp.{{ $keranjang->harga }}</p>
-                            </td>
-                            <td class="cart_quantity">
-                                {{ $keranjang->jumlah }}
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">Rp.{{ $keranjang->harga * $keranjang->jumlah }}</p>
-                            </td>
-                        </tr>
-                        <?php $total += ($keranjang->jumlah * $keranjang->harga);  ?>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-    <!--/#cart_items-->
-
-    <section id="do_action">
+    <section id="form">
+        <!--form-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-8">
-                    <div class="total_area">
-                        <ul>
-                            <li>Total <span>Rp.{{ $total }}</span></li>
-                        </ul>
-                        <a class="btn btn-default check_out" style="margin-left:40px" href="/Checkout">Check Out</a>
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="login-form">
+                        <!--login form-->
+                        <h2>Konfirmasi</h2>
+                        <form action="/Konfirm" enctype="multipart/form-data" method="POST">
+                            <input type="text" placeholder="ID Token" name="id_token" id="id_token" />
+                            <input type="file" name="file" id="file" />
+                            <button type="submit" class="btn btn-default">Confirm</button>
+                        </form>
                     </div>
+                    <!--/login form-->
                 </div>
-                <div class="col-sm-2"></div>
             </div>
         </div>
     </section>
-    <!--/#do_action-->
+    <!--/form-->
+
 
     <footer id="footer">
         <!--Footer-->
@@ -159,7 +114,7 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+                    <p class="pull-left">Copyright (c) 2013 E-SHOPPER Inc. All rights reserved.</p>
                     <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
                 </div>
             </div>
@@ -168,11 +123,10 @@
     </footer>
     <!--/Footer-->
 
-
-
     <script src="/BahanStudy/js/jquery.js"></script>
-    <script src="/BahanStudy/js/bootstrap.min.js"></script>
+    <script src="/BahanStudy/js/price-range.js"></script>
     <script src="/BahanStudy/js/jquery.scrollUp.min.js"></script>
+    <script src="/BahanStudy/js/bootstrap.min.js"></script>
     <script src="/BahanStudy/js/jquery.prettyPhoto.js"></script>
     <script src="/BahanStudy/js/main.js"></script>
 </body>
